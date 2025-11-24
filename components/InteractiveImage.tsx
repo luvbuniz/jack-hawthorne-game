@@ -52,7 +52,7 @@ const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, hot
   return (
     <div className="relative w-full h-full bg-neutral-900 overflow-hidden">
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-[#eaddcf] z-10">
+        <div className="absolute inset-0 flex items-center justify-center bg-[#eaddcf] z-10 transition-opacity duration-300">
           <div className="flex flex-col items-center">
              <ICONS.Feather className="w-16 h-16 text-[#8b7355] animate-bounce" />
              <p className="mt-4 font-sans text-xl font-bold text-[#5c4d3c]">Painting Scene...</p>
@@ -64,7 +64,8 @@ const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, hot
         <img 
           src={imageUrl} 
           alt="Scene illustration" 
-          className="w-full h-full object-cover animate-in fade-in duration-1000"
+          className="w-full h-full object-cover transition-opacity duration-1000 opacity-100"
+          style={{ opacity: loading ? 0 : 1 }}
         />
       )}
 
@@ -92,7 +93,7 @@ const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, hot
 
       {/* Info Modal/Overlay */}
       {selectedHotspot && (
-        <div className="absolute inset-0 bg-black/80 z-30 flex items-center justify-center p-4 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="absolute inset-0 bg-black/80 z-30 flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300">
           <div className="bg-white p-6 rounded-lg max-w-lg shadow-2xl border-4 border-[#8b7355] relative">
             <button 
               onClick={() => setSelectedHotspot(null)}

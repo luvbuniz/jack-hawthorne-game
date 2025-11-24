@@ -48,7 +48,7 @@ const Quiz: React.FC<QuizProps> = ({ questions, onRestart }) => {
     const RewardIcon = reward.icon;
 
     return (
-      <div className="max-w-2xl mx-auto p-8 bg-white rounded-xl shadow-xl border-4 border-[#8b7355] text-center mt-10 animate-in fade-in duration-500">
+      <div className="max-w-2xl mx-auto p-8 bg-white rounded-xl shadow-xl border-4 border-[#8b7355] text-center mt-10 transition-all duration-500">
         <RewardIcon className={`w-32 h-32 mx-auto mb-6 ${reward.color}`} />
         <h2 className="text-4xl font-bold text-stone-900 mb-4">Quiz Complete!</h2>
         <p className="text-2xl mb-8 font-bold text-stone-700">You scored {score} out of {questions.length}</p>
@@ -147,7 +147,7 @@ const Quiz: React.FC<QuizProps> = ({ questions, onRestart }) => {
           </div>
 
           {isAnswered && (
-            <div className="mt-8 p-6 bg-stone-100 rounded-xl border-l-8 border-[#8b7355] animate-in fade-in slide-in-from-bottom-4 shadow-inner">
+            <div className="mt-8 p-6 bg-stone-100 rounded-xl border-l-8 border-[#8b7355] transition-all duration-300 shadow-inner">
               <div className="flex flex-col md:flex-row items-start gap-4">
                 <div className={`p-3 rounded-full text-white mt-1 flex-shrink-0 ${selectedOption === currentQ.correctAnswer ? 'bg-green-600' : 'bg-[#8b7355]'}`}>
                     {selectedOption === currentQ.correctAnswer ? <ICONS.Award className="w-8 h-8" /> : <ICONS.Info className="w-8 h-8" />}

@@ -1,16 +1,23 @@
 import { GoogleGenAI, Modality } from "@google/genai";
 
-// Ensure API key is present; otherwise, this will throw or fail gracefully in usage.
-const apiKey = process.env.API_KEY || ''; 
 let ai: GoogleGenAI | null = null;
 
-if (apiKey) {
-  ai = new GoogleGenAI({ apiKey });
-}
+const getAiClient = () => {
+  if (ai) return ai;
+  
+  // Safe access guard for process.env
+  const apiKey = (typeof process !== 'undefined' && process.env) ? process.env.API_KEY : '';
+  
+  if (apiKey) {
+    ai = new GoogleGenAI({ apiKey });
+  }
+  return ai;
+};
 
 export const generateStoryImage = async (prompt: string): Promise<string | null> => {
-  if (!ai) {
-    console.warn("Gemini API Key is missing. Using placeholder.");
+  const client = getAiClient();
+  if (!client) {
+    console.warn("Gemini API Key is missing or client failed to initialize. Using placeholder.");
     return null;
   }
 
@@ -18,7 +25,7 @@ export const generateStoryImage = async (prompt: string): Promise<string | null>
     // Modified prompt to match the requested style: Oil painting, Victorian storybook, highly detailed.
     const enhancedPrompt = `Classic Victorian storybook illustration, oil painting on canvas style, masterpiece, highly detailed, realistic proportions, warm golden lighting, 19th century atmosphere. Scene: ${prompt}`;
 
-    const response = await ai.models.generateContent({
+    const response = await client.models.generateContent({
       model: 'gemini-2.5-flash-image',
       contents: {
         parts: [
@@ -48,10 +55,11 @@ export const generateStoryImage = async (prompt: string): Promise<string | null>
 };
 
 export const generateStorySpeech = async (text: string): Promise<string | null> => {
-  if (!ai) return null;
+  const client = getAiClient();
+  if (!client) return null;
 
   try {
-    const response = await ai.models.generateContent({
+    const response = await client.models.generateContent({
       model: 'gemini-2.5-flash-preview-tts',
       contents: {
         parts: [{ text: text }],
