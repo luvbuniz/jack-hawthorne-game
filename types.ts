@@ -23,6 +23,7 @@ export interface StoryNode {
   title: string;
   content: string; // The narrative text
   imagePrompt: string; // Prompt for Gemini
+  imagePath?: string; // Path to static image in /public/images/
   choices: Choice[];
   hotspots?: Hotspot[];
   isEnd?: boolean;

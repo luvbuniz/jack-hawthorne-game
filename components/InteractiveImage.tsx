@@ -6,16 +6,26 @@ import { generateStoryImage } from '../services/geminiService';
 interface InteractiveImageProps {
   nodeId: string;
   prompt: string;
+  imagePath?: string;
   hotspots?: Hotspot[];
 }
 
-const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, hotspots }) => {
+const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, imagePath, hotspots }) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
 
   useEffect(() => {
     let isMounted = true;
+
+    // If we have a static image path, use it directly
+    if (imagePath) {
+      setImageUrl(imagePath);
+      setLoading(false);
+      return;
+    }
+
+    // Otherwise, fall back to AI generation
     const fetchImage = async () => {
       // Check if we have a cached image in session storage to save API calls
       const cached = sessionStorage.getItem(`img_${nodeId}`);
@@ -47,7 +57,7 @@ const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, hot
     return () => {
       isMounted = false;
     };
-  }, [nodeId, prompt]);
+  }, [nodeId, prompt, imagePath]);
 
   return (
     <div className="relative w-full h-full bg-neutral-900 overflow-hidden">
