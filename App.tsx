@@ -132,9 +132,10 @@ const App: React.FC = () => {
       {/* RIGHT PANEL: Image (Fixed) */}
       <div className="w-full md:w-1/2 h-64 md:h-full bg-stone-900 relative border-l-4 border-[#8b7355] shadow-inner">
         {appState === AppState.STORY && currentNode ? (
-          <InteractiveImage 
-            nodeId={currentNode.id} 
-            prompt={currentNode.imagePrompt} 
+          <InteractiveImage
+            nodeId={currentNode.id}
+            prompt={currentNode.imagePrompt}
+            imagePath={currentNode.imagePath}
             hotspots={currentNode.hotspots}
           />
         ) : (

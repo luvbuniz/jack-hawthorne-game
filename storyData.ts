@@ -8,8 +8,9 @@ export const STORY_NODES: Record<string, StoryNode> = {
 
 Jack Hawthorne, age twelve, watches it all from his attic window. Below, children not much older than him spill out of textile mills after a long day's shift. Jack's father, a mapmaker, often tells him how steam engines and machines are changing the world — but not always for the better.
 
-One morning, Jack finds a torn piece of parchment tucked in an old atlas. It’s marked with the initials "E.I.C." — the East India Company. Moments later, through the cracked glass of his window, Jack hears voices from the alley below: "Secrets… war plans… Persia."`,
+One morning, Jack finds a torn piece of parchment tucked in an old atlas. It's marked with the initials "E.I.C." — the East India Company. Moments later, through the cracked glass of his window, Jack hears voices from the alley below: "Secrets… war plans… Persia."`,
     imagePrompt: "Victorian London street 1851, smoky sky, factories in background, attic window view, oil painting style",
+    imagePath: "/images/start.jpg",
     hotspots: [
       { id: 'h1', x: 20, y: 30, label: 'Factories', description: 'Factories roared all day during the Industrial Revolution. Children Jack\'s age often worked 12-hour shifts tending giant looms.' },
       { id: 'h2', x: 80, y: 70, label: 'The Atlas', description: 'Maps were powerful tools. The British Empire relied on accurate maps to control trade routes and territory across the globe.' },
@@ -30,6 +31,7 @@ In the crowded hospital tent, you meet a calm, determined woman: Florence Nighti
 
 A captain bursts in. "We need this message across enemy lines. It could save lives." He hands it to you. You nod. You're ready.`,
     imagePrompt: "Florence Nightingale in a candlelit hospital tent, Crimean War, boiling bandages, soldiers in background, oil painting",
+    imagePath: "/images/Florence Nightingale in the Field Hospital.jpg",
     hotspots: [
       { id: 'h3', x: 50, y: 50, label: 'Florence Nightingale', description: 'Known as "The Lady with the Lamp", she revolutionized nursing by insisting on sanitation and hygiene, drastically reducing death rates.' },
       { id: 'h4', x: 80, y: 20, label: 'The Message', description: 'Military dispatches were crucial. Before radio, runners and riders had to physically carry orders through dangerous territory.' }
@@ -46,6 +48,7 @@ A captain bursts in. "We need this message across enemy lines. It could save liv
 
 It's a moment of pure chance. Do you find a way out, or does your luck run out?`,
     imagePrompt: "Dark muddy trenches at night, moonlight, soldier hiding, tense atmosphere, oil painting",
+    imagePath: "/images/Moonlit Vigil of a Soldier.jpg",
     hotspots: [
       { id: 'h5', x: 30, y: 80, label: 'Trenches', description: 'Trench warfare involved digging long, narrow ditches for protection. It was muddy, cold, and dangerous.' }
     ],
@@ -59,24 +62,27 @@ It's a moment of pure chance. Do you find a way out, or does your luck run out?`
     title: 'Signal Success',
     content: `You climb the ridge and wave your flags in a careful pattern. Down below, a sergeant copies your message. Minutes later, cannon fire shifts — the troops are saved.
 
-Back in London, you’re invited to Kensington Palace. Queen Victoria pins a medal to your jacket. "For cleverness in the field," she says with a smile.`,
+Back in London, you're invited to Kensington Palace. Queen Victoria pins a medal to your jacket. "For cleverness in the field," she says with a smile.`,
     imagePrompt: "Queen Victoria pinning a medal on a young boy in a fancy palace room, Kensington Palace, oil painting",
+    imagePath: "/images/queenvic.jpg",
     isEnd: true,
     choices: []
   },
   'escape_tunnel': {
     id: 'escape_tunnel',
     title: 'Escape Tunnel',
-    content: `You stumble into a tunnel dug beneath the trenches. Holding your compass, you crawl toward distant light. At the far end, British soldiers help you up. "You’re just in time," one says. They rush off with your message. You lean back in the grass, heart pounding. You’ve saved lives tonight.`,
+    content: `You stumble into a tunnel dug beneath the trenches. Holding your compass, you crawl toward distant light. At the far end, British soldiers help you up. "You're just in time," one says. They rush off with your message. You lean back in the grass, heart pounding. You've saved lives tonight.`,
     imagePrompt: "Soldiers emerging from a tunnel, holding a compass, dawn light, relief, oil painting",
+    imagePath: "/images/compass.jpg",
     isEnd: true,
     choices: []
   },
   'captured': {
     id: 'captured',
     title: 'Captured!',
-    content: `You're dragged into a tent lit by candlelight. A British general scowls. "A child? A spy?" You show him the letter and stammer out your story. His brow softens. "You’re braver than many I’ve known." He hands you a sealed letter. "Take this home — you’ve earned it."`,
+    content: `You're dragged into a tent lit by candlelight. A British general scowls. "A child? A spy?" You show him the letter and stammer out your story. His brow softens. "You're braver than many I've known." He hands you a sealed letter. "Take this home — you've earned it."`,
     imagePrompt: "Inside a military tent, general looking at a scared boy, candlelight, oil painting",
+    imagePath: "/images/tent.jpg",
     isEnd: true,
     choices: []
   },
@@ -87,6 +93,7 @@ Back in London, you’re invited to Kensington Palace. Queen Victoria pins a med
 
 Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of rebellion, and learn the East India Company rules here — like a private empire.`,
     imagePrompt: "Port of Calcutta 1850s, sailing ships, crates of tea, busy market, exotic architecture, oil painting",
+    imagePath: "/images/calcutta.jpg",
     hotspots: [
       { id: 'h6', x: 20, y: 60, label: 'East India Company', description: 'A powerful British trading company that effectively ruled large parts of India with its own private army.' },
       { id: 'h7', x: 70, y: 40, label: 'Tea Trade', description: 'Tea was a major commodity. The Company grew opium in India to trade for tea in China.' }
@@ -99,16 +106,18 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
   'merchant_caravan': {
     id: 'merchant_caravan',
     title: 'Merchant Caravan',
-    content: `You join a British merchant selling tea and spices, heading toward a remote region in the Himalayas. He is a local guide who knows many languages. As you cross rocky trails and sleep beneath starlit skies, you begin to understand how trade shapes the empire. One night, he hands you a brass compass. "You’re made for this life," he says with a grin.`,
+    content: `You join a British merchant selling tea and spices, heading toward a remote region in the Himalayas. He is a local guide who knows many languages. As you cross rocky trails and sleep beneath starlit skies, you begin to understand how trade shapes the empire. One night, he hands you a brass compass. "You're made for this life," he says with a grin.`,
     imagePrompt: "Himalayan mountain trail, merchant caravan with yaks or horses, snowy peaks, starry night, oil painting",
+    imagePath: "/images/mountain.jpg",
     isEnd: true,
     choices: []
   },
   'into_jungle': {
     id: 'into_jungle',
     title: 'Into the Jungle',
-    content: `You follow the rider deep into the thick jungle. The trees are so tall they block out the sun. At the end of a narrow path, you discover a rebel camp. The people there are quiet, watchful. You don’t speak — just listen. You hear plans to rise against the East India Company. (Reflecting the Sepoy Rebellion of 1857). You leave the jungle changed.`,
+    content: `You follow the rider deep into the thick jungle. The trees are so tall they block out the sun. At the end of a narrow path, you discover a rebel camp. The people there are quiet, watchful. You don't speak — just listen. You hear plans to rise against the East India Company. (Reflecting the Sepoy Rebellion of 1857). You leave the jungle changed.`,
     imagePrompt: "Dense green jungle, hidden camp, rebels gathering around a fire, tense atmosphere, oil painting",
+    imagePath: "/images/Victorian Explorer in Jungle Standoff.jpg",
     isEnd: true,
     choices: []
   },
@@ -117,6 +126,7 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
     title: 'Secret Mission to China',
     content: `You walk through narrow streets, clutching a wax-sealed letter marked "urgent." The year is 1857, and tensions are high following the Opium Wars. A stranger watches you from the shadows. You walk faster.`,
     imagePrompt: "Narrow Chinese street 1850s, lanterns, shadows, mysterious figure, night time, oil painting",
+    imagePath: "/images/china.jpg",
     hotspots: [
       { id: 'h8', x: 50, y: 50, label: 'Opium Wars', description: 'Wars fought between Britain and China over trade rights and the opium trade, leading to forced treaties.' }
     ],
@@ -130,6 +140,7 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
     title: 'The Hidden Alley',
     content: `You crouch in a dark alley. Hours later, you knock on a carved wooden door. A Chinese scholar opens it. He examines the letter, nods, and hands you a small pendant made of jade. Scholars often served as the quiet bridge between foreign diplomats and local leaders.`,
     imagePrompt: "Chinese scholar in traditional robes, carved wooden door, jade pendant, oil painting",
+    imagePath: "/images/scholar.jpg",
     isEnd: true,
     choices: []
   },
@@ -138,6 +149,7 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
     title: 'Dangerous Delivery',
     content: `You dart through the crowded market, dodging carts of ginger and lanterns. Just as the stranger gets close, you reach the embassy gate. "Well done," says the guard. In an age of fragile alliances, diplomatic letters were often hand-delivered under great risk.`,
     imagePrompt: "Action scene, running through a crowded Chinese market, lanterns blurring, embassy gates in distance, oil painting",
+    imagePath: "/images/market.jpg",
     isEnd: true,
     choices: []
   },
@@ -146,8 +158,9 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
     title: 'The Great Exhibition',
     content: `You enter the Crystal Palace — a vast glass building filled with marvels. Steam engines hiss. Telegraph wires buzz. Visitors crowd around machines from around the world.
 
-A man drops a folded paper as he passes. You pick it up — it’s a coded message.`,
+A man drops a folded paper as he passes. You pick it up — it's a coded message.`,
     imagePrompt: "Interior of the Crystal Palace 1851, glass ceiling, steam engines on display, crowds in Victorian dress, oil painting",
+    imagePath: "/images/crystal palace.jpg",
     hotspots: [
       { id: 'h9', x: 50, y: 20, label: 'Crystal Palace', description: 'A massive structure made of cast iron and plate glass, built in Hyde Park to house the Great Exhibition.' },
       { id: 'h10', x: 30, y: 70, label: 'Telegraph', description: 'A revolutionary machine that sent messages quickly over long distances using electric signals.' }
@@ -162,6 +175,7 @@ A man drops a folded paper as he passes. You pick it up — it’s a coded messa
     title: 'Following the Man',
     content: `You slip through the crowd, tailing the man into a storage room. Inside, papers with maps are scattered across a table. You memorize coordinates just as he bolts. Moments later, you hand the info to a constable. Maps and engineering secrets were powerful tools in the age of empires.`,
     imagePrompt: "Storage room, scattered maps on table, fleeing shadow, suspenseful, oil painting",
+    imagePath: "/images/storage room.jpg",
     isEnd: true,
     choices: []
   },
@@ -170,6 +184,7 @@ A man drops a folded paper as he passes. You pick it up — it’s a coded messa
     title: 'Cracking the Code',
     content: `You find a quiet corner. The message reads: "The lion must sleep before the hammer drops." It's a cipher. You copy it into your journal. Ciphers were used to send secret instructions between spies and generals. You may not know what it means yet, but it could be important someday.`,
     imagePrompt: "Boy sitting on a bench in the Crystal Palace, writing in a notebook, mysterious paper, oil painting",
+    imagePath: "/images/Decoding Secrets at the Great Exhibition.jpg",
     isEnd: true,
     choices: []
   }
