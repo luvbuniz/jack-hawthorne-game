@@ -1,4 +1,4 @@
-import { BookOpen, Map, Feather, Compass, Award, Search, Info, Volume2, Square, Loader, Coins, Trophy, CheckCircle2, NotebookPen, Lock, Play, RotateCcw } from 'lucide-react';
+import { BookOpen, Map, Feather, Compass, Award, Search, Info, Volume2, VolumeX, Square, Loader, Coins, Trophy, CheckCircle2, NotebookPen, Lock, Play, RotateCcw, Music, ChevronDown } from 'lucide-react';
 
 export const ICONS = {
   Book: BookOpen,
@@ -9,6 +9,7 @@ export const ICONS = {
   Search: Search,
   Info: Info,
   Volume: Volume2,
+  VolumeOff: VolumeX,
   Stop: Square,
   Loader: Loader,
   Coin: Coins,
@@ -18,6 +19,8 @@ export const ICONS = {
   Lock: Lock,
   Play: Play,
   Restart: RotateCcw,
+  Music: Music,
+  ChevronDown: ChevronDown,
 };
 
 export const PLACEHOLDER_IMAGE = 'https://picsum.photos/800/600?grayscale&blur=2';

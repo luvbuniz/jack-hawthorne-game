@@ -73,10 +73,10 @@ const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, ima
       )}
       
       {imageUrl && (
-        <img 
-          src={imageUrl} 
-          alt="Scene illustration" 
-          className="w-full h-full object-cover transition-opacity duration-1000 opacity-100"
+        <img
+          src={imageUrl}
+          alt="Scene illustration"
+          className="w-full h-full object-cover kenburns"
           style={{ opacity: loading ? 0 : 1 }}
         />
       )}
@@ -111,7 +111,7 @@ const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, ima
 
       {/* Info Modal/Overlay */}
       {selectedHotspot && (
-        <div className="absolute inset-0 bg-black/80 z-30 flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300">
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300">
           <div className="bg-white p-6 rounded-lg max-w-lg shadow-2xl border-4 border-[#8b7355] relative">
             <button 
               onClick={() => setSelectedHotspot(null)}

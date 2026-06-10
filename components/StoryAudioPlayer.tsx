@@ -5,9 +5,10 @@ import { generateStorySpeech } from '../services/geminiService';
 interface StoryAudioPlayerProps {
   text: string;
   nodeId: string;
+  autoPlay?: boolean;
 }
 
-// PCM Decode Helpers
+// PCM Decode Helpers (for Gemini-generated narration)
 function decode(base64: string) {
   const binaryString = atob(base64);
   const len = binaryString.length;
@@ -37,7 +38,19 @@ async function decodeAudioData(
   return buffer;
 }
 
-const StoryAudioPlayer: React.FC<StoryAudioPlayerProps> = ({ text, nodeId }) => {
+// Pick the most storybook-appropriate browser voice available:
+// prefer British English, then any English voice.
+function pickVoice(): SpeechSynthesisVoice | null {
+  const voices = window.speechSynthesis?.getVoices() ?? [];
+  return (
+    voices.find(v => /en-GB/i.test(v.lang) && /daniel|arthur|george|male/i.test(v.name)) ||
+    voices.find(v => /en-GB/i.test(v.lang)) ||
+    voices.find(v => /^en/i.test(v.lang)) ||
+    null
+  );
+}
+
+const StoryAudioPlayer: React.FC<StoryAudioPlayerProps> = ({ text, nodeId, autoPlay = false }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [loading, setLoading] = useState(false);
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -45,14 +58,26 @@ const StoryAudioPlayer: React.FC<StoryAudioPlayerProps> = ({ text, nodeId }) => 
   const audioBufferRef = useRef<AudioBuffer | null>(null);
   const isMountedRef = useRef(true);
 
+  // Browser voices load asynchronously; warm them up so pickVoice works
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+    const warm = () => window.speechSynthesis.getVoices();
+    warm();
+    window.speechSynthesis.addEventListener('voiceschanged', warm);
+    return () => window.speechSynthesis.removeEventListener('voiceschanged', warm);
+  }, []);
+
   useEffect(() => {
     isMountedRef.current = true;
+    if (autoPlay) {
+      playAudio();
+    }
     return () => {
       isMountedRef.current = false;
       stopAudio();
-      // Reset buffer when node changes
       audioBufferRef.current = null;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nodeId]);
 
   const stopAudio = () => {
@@ -77,7 +102,10 @@ const StoryAudioPlayer: React.FC<StoryAudioPlayerProps> = ({ text, nodeId }) => 
     if (typeof window === 'undefined' || !window.speechSynthesis) return false;
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
+    const voice = pickVoice();
+    if (voice) utterance.voice = voice;
     utterance.rate = 0.95;
+    utterance.pitch = 1.0;
     utterance.onend = () => {
       if (isMountedRef.current) setIsPlaying(false);
     };
@@ -149,7 +177,8 @@ const StoryAudioPlayer: React.FC<StoryAudioPlayerProps> = ({ text, nodeId }) => 
     }
   };
 
-  const handleToggle = () => {
+  const handleToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (isPlaying) {
       stopAudio();
     } else {
@@ -158,25 +187,21 @@ const StoryAudioPlayer: React.FC<StoryAudioPlayerProps> = ({ text, nodeId }) => 
   };
 
   return (
-    <div className="flex items-center gap-3 my-4 p-3 bg-[#eaddcf] rounded-lg border border-[#d4c5b0] w-fit shadow-sm">
-      <button 
-        onClick={handleToggle}
-        disabled={loading}
-        className="w-10 h-10 flex items-center justify-center bg-[#8b7355] text-white rounded-full hover:bg-[#6d5a43] transition-colors disabled:opacity-50"
-        aria-label={isPlaying ? "Stop narration" : "Play narration"}
-      >
-        {loading ? (
-            <ICONS.Loader className="w-5 h-5 animate-spin" />
-        ) : isPlaying ? (
-            <ICONS.Stop className="w-5 h-5 fill-current" />
-        ) : (
-            <ICONS.Volume className="w-5 h-5" />
-        )}
-      </button>
-      <span className="text-[#5c4d3c] font-bold font-serif text-sm uppercase tracking-wide">
-        {loading ? 'Generating Narration...' : isPlaying ? 'Listen' : 'Listen to Story'}
-      </span>
-    </div>
+    <button
+      onClick={handleToggle}
+      disabled={loading}
+      className="w-9 h-9 flex items-center justify-center bg-[#8b7355] text-white rounded-full hover:bg-[#a08660] transition-colors disabled:opacity-50 flex-shrink-0 shadow"
+      aria-label={isPlaying ? "Stop narration" : "Play narration"}
+      title={isPlaying ? "Stop narration" : "Listen to this scene"}
+    >
+      {loading ? (
+          <ICONS.Loader className="w-4 h-4 animate-spin" />
+      ) : isPlaying ? (
+          <ICONS.Stop className="w-4 h-4 fill-current" />
+      ) : (
+          <ICONS.Volume className="w-4 h-4" />
+      )}
+    </button>
   );
 };
 

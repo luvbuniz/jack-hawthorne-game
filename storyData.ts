@@ -13,7 +13,7 @@ One morning, Jack finds a torn piece of parchment tucked in an old atlas. It's m
     imagePath: "/images/start.jpg",
     hotspots: [
       { id: 'h1', x: 20, y: 30, label: 'Factories', description: 'Factories roared all day during the Industrial Revolution. Children Jack\'s age often worked 12-hour shifts tending giant looms.' },
-      { id: 'h2', x: 80, y: 70, label: 'The Atlas', description: 'Maps were powerful tools. The British Empire relied on accurate maps to control trade routes and territory across the globe.' },
+      { id: 'h2', x: 80, y: 50, label: 'The Atlas', description: 'Maps were powerful tools. The British Empire relied on accurate maps to control trade routes and territory across the globe.' },
     ],
     choices: [
       { text: "Follow your brother to join the Army", nextNodeId: "army_intro" },
@@ -50,7 +50,7 @@ It's a moment of pure chance. Hold your breath, flip the lucky coin your brother
     imagePrompt: "Dark muddy trenches at night, moonlight, soldier hiding, tense atmosphere, oil painting",
     imagePath: "/images/Moonlit Vigil of a Soldier.jpg",
     hotspots: [
-      { id: 'h5', x: 30, y: 80, label: 'Trenches', description: 'Trench warfare involved digging long, narrow ditches for protection. The siege of Sevastopol (1854–1855) saw months of muddy, dangerous trench fighting.' }
+      { id: 'h5', x: 30, y: 55, label: 'Trenches', description: 'Trench warfare involved digging long, narrow ditches for protection. The siege of Sevastopol (1854–1855) saw months of muddy, dangerous trench fighting.' }
     ],
     chance: {
       headsNodeId: 'escape_tunnel',
@@ -107,7 +107,7 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
     imagePrompt: "Port of Calcutta 1850s, sailing ships, crates of tea, busy market, exotic architecture, oil painting",
     imagePath: "/images/calcutta.jpg",
     hotspots: [
-      { id: 'h6', x: 20, y: 60, label: 'East India Company', description: 'A powerful British trading company that effectively ruled large parts of India with its own private army.' },
+      { id: 'h6', x: 20, y: 50, label: 'East India Company', description: 'A powerful British trading company that effectively ruled large parts of India with its own private army.' },
       { id: 'h7', x: 70, y: 40, label: 'Tea Trade', description: 'Tea was a major commodity. The Company grew opium in India to trade for tea in China.' }
     ],
     choices: [
@@ -134,9 +134,9 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
     title: 'Into the Jungle',
     content: `You follow the rider deep into the thick jungle. The trees are so tall they block out the sun. At the end of a narrow path, you discover a rebel camp. The people there are quiet, watchful. You don't speak — just listen. You hear plans to rise against the East India Company. You leave the jungle changed.`,
     imagePrompt: "Dense green jungle, hidden camp, rebels gathering around a fire, tense atmosphere, oil painting",
-    imagePath: "/images/Victorian Explorer in Jungle Standoff.jpg",
+    imagePath: "/images/mutiny.jpg",
     hotspots: [
-      { id: 'h13', x: 40, y: 60, label: 'The Rebellion', description: 'In 1857, Indian soldiers (called sepoys) rose up against the East India Company in a massive rebellion. It spread across northern India and shook the empire to its core.' }
+      { id: 'h13', x: 40, y: 48, label: 'The Rebellion', description: 'In 1857, Indian soldiers (called sepoys) rose up against the East India Company in a massive rebellion. It spread across northern India and shook the empire to its core.' }
     ],
     isEnd: true,
     badge: 'Silent Witness',
@@ -192,7 +192,7 @@ A man drops a folded paper as he passes. You pick it up — it's a coded message
     imagePath: "/images/crystal palace.jpg",
     hotspots: [
       { id: 'h9', x: 50, y: 20, label: 'Crystal Palace', description: 'A massive structure made of cast iron and plate glass, built in Hyde Park to house the Great Exhibition.' },
-      { id: 'h10', x: 30, y: 70, label: 'Telegraph', description: 'A revolutionary machine that sent messages quickly over long distances using electric signals.' }
+      { id: 'h10', x: 30, y: 52, label: 'Telegraph', description: 'A revolutionary machine that sent messages quickly over long distances using electric signals.' }
     ],
     choices: [
       { text: "Follow the man through the crowd", nextNodeId: "following_man" },
@@ -215,7 +215,7 @@ A man drops a folded paper as he passes. You pick it up — it's a coded message
     title: 'Cracking the Code',
     content: `You find a quiet corner. The message reads: "The lion must sleep before the hammer drops." It's a cipher. You copy it into your journal. Ciphers were used to send secret instructions between spies and generals. You may not know what it means yet, but it could be important someday.`,
     imagePrompt: "Boy sitting on a bench in the Crystal Palace, writing in a notebook, mysterious paper, oil painting",
-    imagePath: "/images/Decoding Secrets at the Great Exhibition.jpg",
+    imagePath: "/images/boy writing.jpg",
     hotspots: [
       { id: 'h15', x: 65, y: 45, label: 'Ciphers', description: 'Around this very time, the mathematician Charles Babbage secretly cracked the Vigenère cipher — a code that had been called "unbreakable" for 300 years.' }
     ],
