@@ -13,7 +13,7 @@ One morning, Jack finds a torn piece of parchment tucked in an old atlas. It's m
     imagePath: "/images/start.jpg",
     hotspots: [
       { id: 'h1', x: 20, y: 30, label: 'Factories', description: 'Factories roared all day during the Industrial Revolution. Children Jack\'s age often worked 12-hour shifts tending giant looms.' },
-      { id: 'h2', x: 80, y: 50, label: 'The Atlas', description: 'Maps were powerful tools. The British Empire relied on accurate maps to control trade routes and territory across the globe.' },
+      { id: 'h2', x: 80, y: 45, label: 'The Atlas', description: 'Maps were powerful tools. The British Empire relied on accurate maps to control trade routes and territory across the globe.' },
     ],
     choices: [
       { text: "Follow your brother to join the Army", nextNodeId: "army_intro" },
@@ -33,7 +33,7 @@ A captain bursts in. "We need this message across enemy lines. It could save liv
     imagePrompt: "Florence Nightingale in a candlelit hospital tent, Crimean War, boiling bandages, soldiers in background, oil painting",
     imagePath: "/images/Florence Nightingale in the Field Hospital.jpg",
     hotspots: [
-      { id: 'h3', x: 50, y: 50, label: 'Florence Nightingale', description: 'Known as "The Lady with the Lamp", she revolutionized nursing by insisting on sanitation and hygiene, drastically reducing death rates.' },
+      { id: 'h3', x: 50, y: 40, label: 'Florence Nightingale', description: 'Known as "The Lady with the Lamp", she revolutionized nursing by insisting on sanitation and hygiene, drastically reducing death rates.' },
       { id: 'h4', x: 80, y: 20, label: 'The Message', description: 'Military dispatches were crucial. Before radio, runners and riders had to physically carry orders through dangerous territory.' }
     ],
     choices: [
@@ -50,7 +50,7 @@ It's a moment of pure chance. Hold your breath, flip the lucky coin your brother
     imagePrompt: "Dark muddy trenches at night, moonlight, soldier hiding, tense atmosphere, oil painting",
     imagePath: "/images/Moonlit Vigil of a Soldier.jpg",
     hotspots: [
-      { id: 'h5', x: 30, y: 55, label: 'Trenches', description: 'Trench warfare involved digging long, narrow ditches for protection. The siege of Sevastopol (1854–1855) saw months of muddy, dangerous trench fighting.' }
+      { id: 'h5', x: 30, y: 45, label: 'Trenches', description: 'Trench warfare involved digging long, narrow ditches for protection. The siege of Sevastopol (1854–1855) saw months of muddy, dangerous trench fighting.' }
     ],
     chance: {
       headsNodeId: 'escape_tunnel',
@@ -107,7 +107,7 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
     imagePrompt: "Port of Calcutta 1850s, sailing ships, crates of tea, busy market, exotic architecture, oil painting",
     imagePath: "/images/calcutta.jpg",
     hotspots: [
-      { id: 'h6', x: 20, y: 50, label: 'East India Company', description: 'A powerful British trading company that effectively ruled large parts of India with its own private army.' },
+      { id: 'h6', x: 20, y: 45, label: 'East India Company', description: 'A powerful British trading company that effectively ruled large parts of India with its own private army.' },
       { id: 'h7', x: 70, y: 40, label: 'Tea Trade', description: 'Tea was a major commodity. The Company grew opium in India to trade for tea in China.' }
     ],
     choices: [
@@ -136,7 +136,7 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
     imagePrompt: "Dense green jungle, hidden camp, rebels gathering around a fire, tense atmosphere, oil painting",
     imagePath: "/images/mutiny.jpg",
     hotspots: [
-      { id: 'h13', x: 40, y: 48, label: 'The Rebellion', description: 'In 1857, Indian soldiers (called sepoys) rose up against the East India Company in a massive rebellion. It spread across northern India and shook the empire to its core.' }
+      { id: 'h13', x: 40, y: 42, label: 'The Rebellion', description: 'In 1857, Indian soldiers (called sepoys) rose up against the East India Company in a massive rebellion. It spread across northern India and shook the empire to its core.' }
     ],
     isEnd: true,
     badge: 'Silent Witness',
@@ -150,7 +150,7 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
     imagePrompt: "Narrow Chinese street 1850s, lanterns, shadows, mysterious figure, night time, oil painting",
     imagePath: "/images/china.jpg",
     hotspots: [
-      { id: 'h8', x: 50, y: 50, label: 'Opium Wars', description: 'Wars fought between Britain and China over trade rights and the opium trade, leading to forced treaties.' }
+      { id: 'h8', x: 50, y: 40, label: 'Opium Wars', description: 'Wars fought between Britain and China over trade rights and the opium trade, leading to forced treaties.' }
     ],
     choices: [
       { text: "Hide in the alley and wait till dark", nextNodeId: "hidden_alley" },
@@ -164,7 +164,7 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
     imagePrompt: "Chinese scholar in traditional robes, carved wooden door, jade pendant, oil painting",
     imagePath: "/images/scholar.jpg",
     hotspots: [
-      { id: 'h14', x: 70, y: 55, label: 'Jade', description: 'In Chinese culture, jade has been treasured for thousands of years as a symbol of wisdom, purity, and protection — far more precious than gold.' }
+      { id: 'h14', x: 70, y: 45, label: 'Jade', description: 'In Chinese culture, jade has been treasured for thousands of years as a symbol of wisdom, purity, and protection — far more precious than gold.' }
     ],
     isEnd: true,
     badge: 'Patient Messenger',
@@ -192,7 +192,7 @@ A man drops a folded paper as he passes. You pick it up — it's a coded message
     imagePath: "/images/crystal palace.jpg",
     hotspots: [
       { id: 'h9', x: 50, y: 20, label: 'Crystal Palace', description: 'A massive structure made of cast iron and plate glass, built in Hyde Park to house the Great Exhibition.' },
-      { id: 'h10', x: 30, y: 52, label: 'Telegraph', description: 'A revolutionary machine that sent messages quickly over long distances using electric signals.' }
+      { id: 'h10', x: 30, y: 45, label: 'Telegraph', description: 'A revolutionary machine that sent messages quickly over long distances using electric signals.' }
     ],
     choices: [
       { text: "Follow the man through the crowd", nextNodeId: "following_man" },

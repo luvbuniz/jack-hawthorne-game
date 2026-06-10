@@ -21,6 +21,7 @@ const DialogueBox: React.FC<DialogueBoxProps> = ({ node, narrationOn, onChoice, 
   );
   const [page, setPage] = useState(0);
   const [chars, setChars] = useState(0);
+  const [hidden, setHidden] = useState(false);
 
   const current = paragraphs[page] ?? '';
   const typingDone = chars >= current.length;
@@ -30,6 +31,7 @@ const DialogueBox: React.FC<DialogueBoxProps> = ({ node, narrationOn, onChoice, 
   useEffect(() => {
     setPage(0);
     setChars(0);
+    setHidden(false);
   }, [node.id]);
 
   useEffect(() => {
@@ -52,17 +54,43 @@ const DialogueBox: React.FC<DialogueBoxProps> = ({ node, narrationOn, onChoice, 
     }
   };
 
+  // Tucked away so the player can explore the scene and reach
+  // hotspots that sit behind the dialogue box
+  if (hidden) {
+    return (
+      <div className="absolute bottom-0 inset-x-0 z-20 p-3 md:p-5 flex justify-center pointer-events-none">
+        <button
+          onClick={() => { sfx.click(); setHidden(false); }}
+          className="pointer-events-auto rise-in flex items-center gap-2 px-4 py-2.5 bg-[#1d1814]/95 backdrop-blur-md border-2 border-[#8b7355] rounded-full text-[#d4b483] font-bold text-sm shadow-2xl hover:bg-[#2a2218] transition-colors"
+          aria-label="Show story text"
+        >
+          <ICONS.Book className="w-4 h-4" /> Show text
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="absolute bottom-0 inset-x-0 z-20 p-3 md:p-5 pointer-events-none">
       <div className="max-w-3xl mx-auto pointer-events-auto rise-in">
         <div className="bg-[#1d1814]/95 backdrop-blur-md border-2 border-[#8b7355] rounded-xl shadow-2xl overflow-hidden">
 
-          {/* Box header: scene title + narration */}
+          {/* Box header: scene title + narration + hide toggle */}
           <div className="flex items-center justify-between px-4 md:px-5 pt-3">
             <span className="text-xs font-bold tracking-[0.2em] text-[#d4b483] uppercase">
               {node.title}
             </span>
-            <StoryAudioPlayer text={node.content} nodeId={node.id} autoPlay={narrationOn} />
+            <div className="flex items-center gap-1">
+              <StoryAudioPlayer text={node.content} nodeId={node.id} autoPlay={narrationOn} />
+              <button
+                onClick={() => { sfx.click(); setHidden(true); }}
+                className="p-1.5 text-stone-400 hover:text-[#d4b483] transition-colors"
+                aria-label="Hide story text to explore the scene"
+                title="Hide text to explore the scene"
+              >
+                <ICONS.ChevronDown className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Narrative text (typewriter, paged) */}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Hotspot } from '../types';
 import { ICONS, PLACEHOLDER_IMAGE } from '../constants';
 import { generateStoryImage } from '../services/geminiService';
@@ -109,11 +110,13 @@ const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, ima
         );
       })}
 
-      {/* Info Modal/Overlay */}
-      {selectedHotspot && (
-        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300">
+      {/* Info Modal/Overlay — portaled to <body> so it always renders above
+          the dialogue box (the animated scene layer creates a stacking
+          context that would otherwise trap it underneath) */}
+      {selectedHotspot && createPortal(
+        <div className="fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300">
           <div className="bg-white p-6 rounded-lg max-w-lg shadow-2xl border-4 border-[#8b7355] relative">
-            <button 
+            <button
               onClick={() => setSelectedHotspot(null)}
               className="absolute top-4 right-4 text-gray-600 hover:text-black p-2 bg-gray-100 rounded-full"
               aria-label="Close"
@@ -131,7 +134,8 @@ const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, ima
               <ICONS.Check className="w-5 h-5" /> Fact added to Jack's Journal
             </p>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
