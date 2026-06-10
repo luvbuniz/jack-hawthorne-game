@@ -65,7 +65,28 @@ const StoryAudioPlayer: React.FC<StoryAudioPlayerProps> = ({ text, nodeId }) => 
       }
       sourceNodeRef.current = null;
     }
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
     setIsPlaying(false);
+  };
+
+  // Fallback narration using the browser's built-in speech synthesis,
+  // so the game is fully playable without a Gemini API key.
+  const playWithBrowserTTS = () => {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return false;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.95;
+    utterance.onend = () => {
+      if (isMountedRef.current) setIsPlaying(false);
+    };
+    utterance.onerror = () => {
+      if (isMountedRef.current) setIsPlaying(false);
+    };
+    window.speechSynthesis.speak(utterance);
+    setIsPlaying(true);
+    return true;
   };
 
   const playAudio = async () => {
@@ -102,6 +123,10 @@ const StoryAudioPlayer: React.FC<StoryAudioPlayerProps> = ({ text, nodeId }) => 
             const bytes = decode(base64Data);
             buffer = await decodeAudioData(bytes, audioContextRef.current, 24000, 1);
             audioBufferRef.current = buffer;
+        } else if (isMountedRef.current) {
+            // No API key or generation failed — use the browser's voice instead
+            playWithBrowserTTS();
+            return;
         }
       }
 

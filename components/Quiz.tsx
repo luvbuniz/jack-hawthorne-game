@@ -5,9 +5,10 @@ import { ICONS } from '../constants';
 interface QuizProps {
   questions: QuizQuestion[];
   onRestart: () => void;
+  onComplete?: (score: number, total: number) => void;
 }
 
-const Quiz: React.FC<QuizProps> = ({ questions, onRestart }) => {
+const Quiz: React.FC<QuizProps> = ({ questions, onRestart, onComplete }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
@@ -32,6 +33,7 @@ const Quiz: React.FC<QuizProps> = ({ questions, onRestart }) => {
       setIsAnswered(false);
     } else {
       setShowResult(true);
+      onComplete?.(score, questions.length);
     }
   };
 

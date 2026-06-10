@@ -8,9 +8,11 @@ interface InteractiveImageProps {
   prompt: string;
   imagePath?: string;
   hotspots?: Hotspot[];
+  discoveredFacts?: string[];
+  onDiscoverFact?: (hotspot: Hotspot) => void;
 }
 
-const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, imagePath, hotspots }) => {
+const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, imagePath, hotspots, discoveredFacts = [], onDiscoverFact }) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
@@ -80,26 +82,32 @@ const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, ima
       )}
 
       {/* Hotspots Layer */}
-      {!loading && hotspots && hotspots.map((spot) => (
-        <button
-          key={spot.id}
-          onClick={() => setSelectedHotspot(spot)}
-          style={{ top: `${spot.y}%`, left: `${spot.x}%` }}
-          className="absolute transform -translate-x-1/2 -translate-y-1/2 group z-20 focus:outline-none focus:ring-4 focus:ring-blue-500 rounded-full"
-          aria-label={`Explore ${spot.label}`}
-        >
-          <div className="relative">
-            <div className="absolute inset-0 bg-yellow-400 rounded-full opacity-50 animate-ping"></div>
-            <div className="relative bg-yellow-500 text-white p-3 rounded-full shadow-lg border-2 border-white hover:bg-yellow-600 transition-colors cursor-pointer">
-              <ICONS.Search className="w-6 h-6" />
+      {!loading && hotspots && hotspots.map((spot) => {
+        const discovered = discoveredFacts.includes(spot.id);
+        return (
+          <button
+            key={spot.id}
+            onClick={() => {
+              setSelectedHotspot(spot);
+              onDiscoverFact?.(spot);
+            }}
+            style={{ top: `${spot.y}%`, left: `${spot.x}%` }}
+            className="absolute transform -translate-x-1/2 -translate-y-1/2 group z-20 focus:outline-none focus:ring-4 focus:ring-blue-500 rounded-full"
+            aria-label={`Explore ${spot.label}`}
+          >
+            <div className="relative">
+              {!discovered && <div className="absolute inset-0 bg-yellow-400 rounded-full opacity-50 animate-ping"></div>}
+              <div className={`relative text-white p-3 rounded-full shadow-lg border-2 border-white transition-colors cursor-pointer ${discovered ? 'bg-green-600 hover:bg-green-700' : 'bg-yellow-500 hover:bg-yellow-600'}`}>
+                {discovered ? <ICONS.Check className="w-6 h-6" /> : <ICONS.Search className="w-6 h-6" />}
+              </div>
+              {/* Tooltip on Hover */}
+              <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max px-3 py-2 bg-black text-white text-sm font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                  {spot.label}
+              </div>
             </div>
-            {/* Tooltip on Hover */}
-            <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max px-3 py-2 bg-black text-white text-sm font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                {spot.label}
-            </div>
-          </div>
-        </button>
-      ))}
+          </button>
+        );
+      })}
 
       {/* Info Modal/Overlay */}
       {selectedHotspot && (
@@ -118,6 +126,9 @@ const InteractiveImage: React.FC<InteractiveImageProps> = ({ nodeId, prompt, ima
             </div>
             <p className="text-gray-800 leading-relaxed text-lg lg:text-xl">
               {selectedHotspot.description}
+            </p>
+            <p className="mt-4 text-sm font-bold text-green-700 flex items-center gap-2">
+              <ICONS.Check className="w-5 h-5" /> Fact added to Jack's Journal
             </p>
           </div>
         </div>

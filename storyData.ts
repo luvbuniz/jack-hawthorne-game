@@ -46,16 +46,19 @@ A captain bursts in. "We need this message across enemy lines. It could save liv
     title: 'Sneak Mission',
     content: `The moon is bright. You crawl through mud, past sleeping guards. Suddenly — a shout! You dive into a trench and press your body against the cold earth.
 
-It's a moment of pure chance. Do you find a way out, or does your luck run out?`,
+It's a moment of pure chance. Hold your breath, flip the lucky coin your brother gave you, and see what fate decides.`,
     imagePrompt: "Dark muddy trenches at night, moonlight, soldier hiding, tense atmosphere, oil painting",
     imagePath: "/images/Moonlit Vigil of a Soldier.jpg",
     hotspots: [
-      { id: 'h5', x: 30, y: 80, label: 'Trenches', description: 'Trench warfare involved digging long, narrow ditches for protection. It was muddy, cold, and dangerous.' }
+      { id: 'h5', x: 30, y: 80, label: 'Trenches', description: 'Trench warfare involved digging long, narrow ditches for protection. The siege of Sevastopol (1854–1855) saw months of muddy, dangerous trench fighting.' }
     ],
-    choices: [
-      { text: "Flip a coin: Heads (Find a tunnel)", nextNodeId: "escape_tunnel" },
-      { text: "Flip a coin: Tails (Get caught)", nextNodeId: "captured" }
-    ]
+    chance: {
+      headsNodeId: 'escape_tunnel',
+      tailsNodeId: 'captured',
+      headsText: 'Heads! You spot a dark opening in the trench wall — a tunnel!',
+      tailsText: 'Tails! A lantern swings your way. "Who goes there?!"'
+    },
+    choices: []
   },
   'signal_success': {
     id: 'signal_success',
@@ -65,7 +68,12 @@ It's a moment of pure chance. Do you find a way out, or does your luck run out?`
 Back in London, you're invited to Kensington Palace. Queen Victoria pins a medal to your jacket. "For cleverness in the field," she says with a smile.`,
     imagePrompt: "Queen Victoria pinning a medal on a young boy in a fancy palace room, Kensington Palace, oil painting",
     imagePath: "/images/queenvic.jpg",
+    hotspots: [
+      { id: 'h11', x: 50, y: 40, label: 'Queen Victoria', description: 'Queen Victoria reigned from 1837 to 1901 — so long that the whole era is named after her. In 1856 she created the Victoria Cross, Britain\'s highest medal for bravery.' }
+    ],
     isEnd: true,
+    badge: 'Signal Master',
+    historicalNote: 'Before electric telegraphs reached the battlefield, armies really did send messages with semaphore flags, lamps, and riders. The Crimean War (1853–1856) was one of the first wars reported almost instantly to the public — by telegraph and even photographs.',
     choices: []
   },
   'escape_tunnel': {
@@ -75,6 +83,8 @@ Back in London, you're invited to Kensington Palace. Queen Victoria pins a medal
     imagePrompt: "Soldiers emerging from a tunnel, holding a compass, dawn light, relief, oil painting",
     imagePath: "/images/compass.jpg",
     isEnd: true,
+    badge: 'Tunnel Runner',
+    historicalNote: 'During the siege of Sevastopol, both sides dug tunnels and trenches for protection and surprise attacks. This style of fighting was an early preview of the trench warfare that would dominate World War I sixty years later.',
     choices: []
   },
   'captured': {
@@ -84,6 +94,8 @@ Back in London, you're invited to Kensington Palace. Queen Victoria pins a medal
     imagePrompt: "Inside a military tent, general looking at a scared boy, candlelight, oil painting",
     imagePath: "/images/tent.jpg",
     isEnd: true,
+    badge: 'Brave Heart',
+    historicalNote: 'Children really did serve with Victorian armies — as drummer boys, buglers, and messengers, some as young as twelve. Their courage was sometimes honored: several teenage boys were among the first to receive the Victoria Cross.',
     choices: []
   },
   'ship_india': {
@@ -109,16 +121,26 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
     content: `You join a British merchant selling tea and spices, heading toward a remote region in the Himalayas. He is a local guide who knows many languages. As you cross rocky trails and sleep beneath starlit skies, you begin to understand how trade shapes the empire. One night, he hands you a brass compass. "You're made for this life," he says with a grin.`,
     imagePrompt: "Himalayan mountain trail, merchant caravan with yaks or horses, snowy peaks, starry night, oil painting",
     imagePath: "/images/mountain.jpg",
+    hotspots: [
+      { id: 'h12', x: 60, y: 25, label: 'The Himalayas', description: 'In the 1800s, Britain and Russia competed for influence over the mountain passes of Central Asia — a rivalry of spies, explorers, and mapmakers nicknamed "The Great Game".' }
+    ],
     isEnd: true,
+    badge: 'Trade Route Trekker',
+    historicalNote: 'Trade built the British Empire as much as armies did. Caravans and ships carried tea, spices, silk, and cotton across the globe — and surveyors secretly mapped the Himalayas, sometimes disguised as merchants or pilgrims.',
     choices: []
   },
   'into_jungle': {
     id: 'into_jungle',
     title: 'Into the Jungle',
-    content: `You follow the rider deep into the thick jungle. The trees are so tall they block out the sun. At the end of a narrow path, you discover a rebel camp. The people there are quiet, watchful. You don't speak — just listen. You hear plans to rise against the East India Company. (Reflecting the Sepoy Rebellion of 1857). You leave the jungle changed.`,
+    content: `You follow the rider deep into the thick jungle. The trees are so tall they block out the sun. At the end of a narrow path, you discover a rebel camp. The people there are quiet, watchful. You don't speak — just listen. You hear plans to rise against the East India Company. You leave the jungle changed.`,
     imagePrompt: "Dense green jungle, hidden camp, rebels gathering around a fire, tense atmosphere, oil painting",
     imagePath: "/images/Victorian Explorer in Jungle Standoff.jpg",
+    hotspots: [
+      { id: 'h13', x: 40, y: 60, label: 'The Rebellion', description: 'In 1857, Indian soldiers (called sepoys) rose up against the East India Company in a massive rebellion. It spread across northern India and shook the empire to its core.' }
+    ],
     isEnd: true,
+    badge: 'Silent Witness',
+    historicalNote: 'The Sepoy Rebellion of 1857 (also called the Indian Rebellion) changed history: afterwards, the British government shut down the East India Company and ruled India directly. This new era, called the British Raj, lasted until India\'s independence in 1947.',
     choices: []
   },
   'china_mission': {
@@ -141,7 +163,12 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
     content: `You crouch in a dark alley. Hours later, you knock on a carved wooden door. A Chinese scholar opens it. He examines the letter, nods, and hands you a small pendant made of jade. Scholars often served as the quiet bridge between foreign diplomats and local leaders.`,
     imagePrompt: "Chinese scholar in traditional robes, carved wooden door, jade pendant, oil painting",
     imagePath: "/images/scholar.jpg",
+    hotspots: [
+      { id: 'h14', x: 70, y: 55, label: 'Jade', description: 'In Chinese culture, jade has been treasured for thousands of years as a symbol of wisdom, purity, and protection — far more precious than gold.' }
+    ],
     isEnd: true,
+    badge: 'Patient Messenger',
+    historicalNote: 'After the First Opium War, the Treaty of Nanking (1842) forced China to open five ports to British trade and hand over Hong Kong. Scholars and translators became vital go-betweens in this tense new world of diplomacy.',
     choices: []
   },
   'dangerous_delivery': {
@@ -151,6 +178,8 @@ Weeks later, you reach Calcutta. The streets are hot and loud. You hear talk of 
     imagePrompt: "Action scene, running through a crowded Chinese market, lanterns blurring, embassy gates in distance, oil painting",
     imagePath: "/images/market.jpg",
     isEnd: true,
+    badge: 'Swift Courier',
+    historicalNote: 'In 1857, Britain and China were sliding into the Second Opium War (1856–1860). With no telephones or radio, sealed letters carried by trusted couriers were how empires negotiated — and spied on each other.',
     choices: []
   },
   'exhibition_intro': {
@@ -177,6 +206,8 @@ A man drops a folded paper as he passes. You pick it up — it's a coded message
     imagePrompt: "Storage room, scattered maps on table, fleeing shadow, suspenseful, oil painting",
     imagePath: "/images/storage room.jpg",
     isEnd: true,
+    badge: 'Sharp-Eyed Sleuth',
+    historicalNote: 'Industrial espionage was very real in the 1800s. Nations sent agents to copy machine designs and steal trade secrets — Britain even banned skilled engineers from leaving the country at one point, to protect its industrial head start.',
     choices: []
   },
   'cracking_code': {
@@ -185,7 +216,12 @@ A man drops a folded paper as he passes. You pick it up — it's a coded message
     content: `You find a quiet corner. The message reads: "The lion must sleep before the hammer drops." It's a cipher. You copy it into your journal. Ciphers were used to send secret instructions between spies and generals. You may not know what it means yet, but it could be important someday.`,
     imagePrompt: "Boy sitting on a bench in the Crystal Palace, writing in a notebook, mysterious paper, oil painting",
     imagePath: "/images/Decoding Secrets at the Great Exhibition.jpg",
+    hotspots: [
+      { id: 'h15', x: 65, y: 45, label: 'Ciphers', description: 'Around this very time, the mathematician Charles Babbage secretly cracked the Vigenère cipher — a code that had been called "unbreakable" for 300 years.' }
+    ],
     isEnd: true,
+    badge: 'Code Breaker',
+    historicalNote: 'Secret codes shaped Victorian politics and war. Charles Babbage — the same inventor who designed the first mechanical computer — broke the "unbreakable" Vigenère cipher in the 1850s, and his work may have helped Britain during the Crimean War.',
     choices: []
   }
 };
@@ -225,7 +261,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       'A map of the stars'
     ],
     correctAnswer: 1,
-    explanation: 'A cipher is a secret code used to encrypt messages so only the intended recipient can read them.'
+    explanation: 'A cipher is a secret code used to encrypt messages so only the intended recipient can read them. Charles Babbage cracked the famous Vigenère cipher in the 1850s.'
   },
   {
     id: 'q4',
@@ -238,5 +274,77 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     ],
     correctAnswer: 2,
     explanation: 'The Telegraph used electric signals to send messages instantly across long distances.'
+  },
+  {
+    id: 'q5',
+    question: 'What was the Crystal Palace?',
+    options: [
+      'Queen Victoria\'s winter home',
+      'A giant building of iron and glass built for the Great Exhibition of 1851',
+      'A famous theatre in Paris',
+      'A glass factory in Manchester'
+    ],
+    correctAnswer: 1,
+    explanation: 'The Crystal Palace was built from cast iron and plate glass in Hyde Park, London, to house the Great Exhibition of 1851 — a showcase of inventions from around the world.'
+  },
+  {
+    id: 'q6',
+    question: 'The Crimean War was fought between Britain (and its allies) and which country?',
+    options: [
+      'France',
+      'China',
+      'The United States',
+      'Russia'
+    ],
+    correctAnswer: 3,
+    explanation: 'In the Crimean War (1853–1856), Britain, France, and the Ottoman Empire fought against Russia. It was one of the first wars reported by telegraph and photography.'
+  },
+  {
+    id: 'q7',
+    question: 'What happened after the Sepoy Rebellion of 1857?',
+    options: [
+      'The East India Company grew even more powerful',
+      'The British government took direct control of India',
+      'India immediately became independent',
+      'The rebellion was kept secret forever'
+    ],
+    correctAnswer: 1,
+    explanation: 'After the rebellion, Britain shut down the East India Company and ruled India directly. This period, called the British Raj, lasted until India\'s independence in 1947.'
+  },
+  {
+    id: 'q8',
+    question: 'What were the Opium Wars about?',
+    options: [
+      'Control of trade between Britain and China',
+      'A disagreement over tea recipes',
+      'The borders of India',
+      'Who would rule Japan'
+    ],
+    correctAnswer: 0,
+    explanation: 'The Opium Wars were fought between Britain and China over trade rights and the opium trade. The Treaty of Nanking (1842) forced China to open ports and hand over Hong Kong.'
+  },
+  {
+    id: 'q9',
+    question: 'During the Industrial Revolution, what was life like for many children?',
+    options: [
+      'They all went to free schools',
+      'They worked long shifts in factories and mills',
+      'They were not allowed in cities',
+      'They only worked on farms'
+    ],
+    correctAnswer: 1,
+    explanation: 'Many children worked 12-hour shifts in textile mills and factories. Laws to limit child labour and require schooling came only gradually during the Victorian era.'
+  },
+  {
+    id: 'q10',
+    question: 'Why did Florence Nightingale insist on washing hands and boiling instruments?',
+    options: [
+      'To make the hospital smell nice',
+      'It was an army tradition',
+      'To stop the spread of deadly infections',
+      'To save soap for the soldiers'
+    ],
+    correctAnswer: 2,
+    explanation: 'Far more soldiers died from infection and disease than from battle wounds. Nightingale\'s sanitation rules dramatically lowered death rates and changed nursing forever.'
   }
 ];
