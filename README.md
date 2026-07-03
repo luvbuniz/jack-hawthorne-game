@@ -24,7 +24,7 @@ Progress (badges, facts, and best quiz score) is saved in the browser, so player
    ```
    npm run dev
    ```
-3. Open http://localhost:3000
+3. Open [https://jack-hawthorne-game.vercel.app/]
 
 ### Optional: Gemini API features
 
